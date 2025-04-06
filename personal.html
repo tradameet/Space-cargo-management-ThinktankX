@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personal & Psychological - ThinkTankX</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8f9fa, #b3cde0);
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #0047ab;
+      color: white;
+      padding: 20px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      position: relative;
+    }
+
+    .search-bar {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+    }
+
+    .search-bar input {
+      padding: 10px 18px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      width: 220px;
+    }
+
+    nav {
+      background-color: #003a8c;
+      padding: 10px 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      padding: 40px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #0047ab;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      background-color: white;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #0047ab;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #e3f0ff;
+    }
+
+    .highlight {
+      background-color: #8cd9ff !important;
+    }
+
+    .chart-container {
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: 0 auto 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    canvas {
+      width: 90% !important;
+      height: auto !important;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    🚀ThinkTankX - Personal & Psychological
+    <div class="search-bar">
+      <input type="text" id="searchInput" list="itemList" placeholder="Search item..."/>
+      <datalist id="itemList">
+        <option value="Books">
+        <option value="Board Games">
+        <option value="Music Player">
+        <option value="Journal">
+        <option value="Meditation Kit">
+        <option value="Virtual Reality Headset">
+      </datalist>
+    </div>
+  </header>
+
+
+  <div class="container">
+    <h2>Personal and Psychological Items</h2>
+
+    <table id="personalTable">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Unit</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <div class="chart-container">
+      <h2 style="text-align:center;">Remaining Quantity Chart</h2>
+      <canvas id="usagePieChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    const items = [
+      { name: "Books", category: "Leisure", quantity: 20, unit: "Units", status: "Available" },
+      { name: "Board Games", category: "Recreation", quantity: 10, unit: "Sets", status: "In Use" },
+      { name: "Music Player", category: "Entertainment", quantity: 5, unit: "Devices", status: "Available" },
+      { name: "Journal", category: "Mental Health", quantity: 15, unit: "Books", status: "Available" },
+      { name: "Sleeping Bag", category: "Personal", quantity: 12, unit: "Kits", status: "Available" },
+      { name: "Virtual Reality Headset", category: "Immersive Media", quantity: 3, unit: "Devices", status: "Limited" },
+      { name: "Exercise Equipment", category: "Fitness", quantity: 8, unit: "Sets", status: "Available" },
+      { name: "Hygiene Kit", category: "Personal", quantity: 20, unit: "Kits", status: "Available" },
+      { name: "Space Clothing", category: "Personal", quantity: 12, unit: "Clothes", status: "Available" }
+    ];
+
+    const tableBody = document.getElementById("tableBody");
+    const chartCanvas = document.getElementById("usagePieChart");
+    let chart;
+
+    function renderTable() {
+      tableBody.innerHTML = "";
+      items.forEach(item => {
+        tableBody.innerHTML += `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.category}</td>
+            <td>${item.quantity}</td>
+            <td>${item.unit}</td>
+            <td>${item.status}</td>
+          </tr>
+        `;
+      });
+    }
+
+    function drawChart() {
+      const labels = items.map(item => item.name);
+      const data = items.map(item => item.quantity);
+      const colors = [
+        "#00BFFF", "#FFA07A", "#98FB98", "#FF6347",
+        "#FFD700", "#BA55D3", "#8B4513", "#5F9EA0", "#6495ED"
+      ];
+
+      chart = new Chart(chartCanvas, {
+        type: "pie",
+        data: {
+          labels: labels,
+          datasets: [{
+            data: data,
+            backgroundColor: colors,
+            borderColor: "#ffffff",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Item Quantities",
+              font: { size: 18 },
+              color: "#1e3a8a"
+            },
+            legend: {
+              position: "bottom",
+              labels: { color: "#000" }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = context.label;
+                  const quantity = context.parsed;
+                  const total = data.reduce((a, b) => a + b, 0);
+                  const percent = ((quantity / total) * 100).toFixed(1);
+                  return `${label}: ${quantity} (${percent}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+      const searchValue = this.value.toLowerCase();
+      document.querySelectorAll("#tableBody tr").forEach(row => {
+        row.classList.remove("highlight");
+        if (row.cells[0].textContent.toLowerCase().includes(searchValue)) {
+          row.classList.add("highlight");
+        }
+      });
+      this.value = "";
+    });
+
+    renderTable();
+    drawChart();
+  </script>
+
+</body>
+</html>

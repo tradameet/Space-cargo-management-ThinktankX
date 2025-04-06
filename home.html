@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ThinkTankX - Welcome</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      color: #00c3ff;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #e6f0ff, #cce0ff);
+      color: #000;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(90deg, #0047ab, #005ce6);
+      color: white;
+      padding: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      color: #00e5ff;
+      text-shadow: 0 0 10px #00e5ff;
+      animation: glow 2s infinite alternate;
+      width: 100%;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00e5ff;
+      }
+      to {
+        text-shadow: 0 0 20px #00bfff;
+      }
+    }
+
+    .sidebar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background-color: #3ea4e8;
+      padding: 1rem;
+      border-bottom: 2px solid #00e5ff;
+      flex-wrap: wrap;
+    }
+
+    .sidebar details {
+      position: relative;
+    }
+
+    .sidebar summary {
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #0b207a;
+    }
+
+    .sidebar summary:hover {
+      text-decoration: underline;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0.5rem;
+      background-color: #0b3d91;
+      border: 1px solid #00e5ff;
+      border-radius: 8px;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 100;
+      display: none;
+    }
+
+    details[open] ul {
+      display: block;
+    }
+
+    .sidebar ul li {
+      margin: 0.3rem 0;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      color: #d8f6ff;
+    }
+
+    .sidebar ul li a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    main h2 {
+      font-size: 2rem;
+      color: #003380;
+      margin-bottom: 1rem;
+    }
+
+    p.description {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #003060;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .cards-row {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: #0b3d91;
+      border: 2px solid #00e5ff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      color: #fff;
+      text-align: center;
+      transition: transform 0.3s ease, background 0.3s ease;
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.2);
+      width: 100%;
+      max-width: 280px;
+      text-decoration: none;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      background-color: #002c66;
+    }
+
+    .card span {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: #d8f6ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #1b1b3a;
+      color: #aaa;
+      margin-top: 4rem;
+    }
+
+    footer a {
+      color: #00c3ff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🚀 ThinkTankX</h1>
+  </header>
+  <div class="sidebar">
+    <details>
+      <summary>🧪 Consumables</summary>
+      <ul>
+        <li><a>Food</a></li>
+        <li><a>Water</a></li>
+        <li><a>Oxygen Canister</a></li>
+        <li><a>Medical Aid Kit</a></li>
+        <li><a>Daily Vitamins</a></li>
+        <li><a>Dehydrated Juice</a></li>
+        <li><a>Protein Bars</a></li>
+
+      </ul>
+    </details>
+    <details>
+      <summary>🛠 Equipment</summary>
+      <ul>
+        <li><a>Maintenance Tools</a></li>
+        <li><a>Power Drill</a></li>
+        <li><a>3D Printer</a></li>
+        <li><a>Communication Device</a></li>
+        <li><a>Radiation Shield Panels</a></li>
+        <li><a>Robotic Arm</a></li>
+        <li><a>Spcesuits</a></li>
+        <li><a>Oxygen Cylinder</a></li>
+        <li><a>Safety Harnesse</a></li>
+
+      </ul>
+    </details>
+    <details>
+      <summary>🔬 Payload</summary>
+      <ul>
+        <li><a>Satellite</a></li>
+        <li><a>Rover</a></li>
+        <li><a>Scientific Equipment</a></li>
+        <li><a>Medical Supplies	</a></li>
+        <li><a>Communication Module</a></li>
+        <li><a>Camera Module</a></li>
+        <li><a>Fuel Canister</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary>🧘 Personal & Psychological</summary>
+      <ul>
+        <li><a>Books</a></li>
+        <li><a>Board Games</a></li>
+        <li><a>Music Player</a></li>
+        <li><a>Journal</a></li>
+        <li><a>Sleeping Bag</a></li>
+        <li><a> Virtual Reality Headset</a></li>
+        <li><a>Exercise Equipment</a></li>
+        <li><a>Hygiene Kit</a></li> 
+        <li><a>Space Clothing</a></li>
+     
+      </ul>
+    </details>
+  </div>
+  <script>
+    const detailsElements = document.querySelectorAll('.sidebar details');
+    detailsElements.forEach(details => {
+      details.addEventListener('click', function () {
+        detailsElements.forEach(otherDetails => {
+          if (otherDetails !== details) {
+            otherDetails.removeAttribute('open');
+          }
+        });
+      });
+    });
+  </script>
+  <main>
+    <h2>Space Station Cargo Management System</h2>
+    <p class="description">
+      A centralized system to monitor, manage, and optimize all space station logistics — consumables, equipment, experiments, and astronaut essentials.
+    </p>
+    <div class="cards-container">
+      <div class="cards-row">
+        <a href="consumables.html" class="card">
+          <span>🧪</span>
+          <div class="card-title">Consumables</div>
+          <div class="card-desc">Track food, water, oxygen, and other life-supporting materials with usage rates and storage requirements.</div>
+        </a>
+        <a href="equipment.html" class="card">
+          <span>🛠</span>
+          <div class="card-title">Equipment</div>
+          <div class="card-desc">Manage maintenance schedules and monitor critical systems like suits, safety tools, and power units.</div>
+        </a>
+      </div>
+      <div class="cards-row">
+        <a href="payload.html" class="card">
+          <span>🔬</span>
+          <div class="card-title">Payload</div>
+          <div class="card-desc">Oversee scientific experiments and equipment on board, their power needs, return timelines, and operational status.</div>
+        </a>
+        <a href="personal.html" class="card">
+          <span>🧘</span>
+          <div class="card-title">Personal & Psychological</div>
+          <div class="card-desc">Log essentials for astronaut well-being like hygiene kits, entertainment tools, clothing, and exercise gear.</div>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div style="margin-bottom: 0.5rem;">
+
+      <a href="about.html">About</a>
+      <a href="help.html">Help</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacyPolicy.html">Privacy Policy</a>
+    </div>
+    &copy; 2025 ThinkTankX Universe. All rights reserved.
+  </footer>
+</body>
+</html>

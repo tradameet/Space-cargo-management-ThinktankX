@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us | ThinkTankX Universe</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d2b;
+      color: #ffffff;
+    }
+
+    header {
+      background-color: #1b1b3a;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      color: #00c3ff;
+      margin: 0;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: #ffffff;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #00c3ff;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      background-color: #1a1a3d;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 195, 255, 0.3);
+    }
+
+    form textarea {
+      grid-column: span 2;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 97%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      background-color: #26264d;
+      color: #fff;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #bbb;
+    }
+
+    button {
+      grid-column: span 2;
+      padding: 12px;
+      background-color: #00c3ff;
+      color: #0d0d2b;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #009fdd;
+    }
+
+    .info {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .info p {
+      margin: 0.5rem 0;
+    }
+
+    .info a {
+      color: #00c3ff;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #1b1b3a;
+      color: #aaa;
+      margin-top: 4rem;
+    }
+
+    footer a {
+      color: #00c3ff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      button {
+        grid-column: span 1;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Contact ThinkTankX Universe</h1>
+    <!-- <nav>
+      <a href="index.html">Home</a>
+      <a href="consumables.html">Consumables</a>
+      <a href="equipment.html">Equipment</a>
+      <a href="payload.html">Payload</a>
+      <a href="personal.html">Personal & Psychological</a>
+      <a href="about.html">About</a>
+      <a href="help.html">Help</a>
+      <a href="contact.html">Contact</a>
+    </nav> -->
+  </header>
+
+  <main>
+    <h2>Reach Out to Us 📬</h2>
+    <form action="#" method="POST">
+      <div>
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required />
+      </div>
+      <div>
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+      </div>
+      <div>
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" placeholder="Subject of your message" />
+      </div>
+      <div>
+        <label for="phone">Phone (optional)</label>
+        <input type="tel" id="phone" name="phone" placeholder="+91-12345-67890" />
+      </div>
+      <div style="grid-column: span 2;">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
+      </div>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="info">
+      <h2>Contact Info 📡</h2>
+      <p><strong>Email:</strong> <a href="mailto:support@thinktankx.space">support@thinktankx.space</a></p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/yourteamprofile" target="_blank">ThinkTankX Universe GitHub</a></p>
+      <p><strong>Phone:</strong> +91 98765 43210</p>
+      <p><strong>Location:</strong> CHARUSAT Space Research Center, Gujarat, India</p>
+    </div>
+  </main>
+  <div class="navigation-buttons" style="text-align:center; margin-top: 2rem; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+    <button onclick="history.back()" style="background-color: #00c3ff; color: #0d0d2b; padding: 0.7rem 1.5rem; font-size: 1rem; border: none; border-radius: 5px; cursor: pointer;">⬅ Go Back</button>
+    <a href="home.html">
+      <button style="background-color: #00c3ff; color: #0d0d2b; padding: 0.7rem 1.5rem; font-size: 1rem; border: none; border-radius: 5px; cursor: pointer;">🏠 Go Home</button>
+    </a>
+  </div>
+  
+  
+
+  <footer>
+    <div style="margin-bottom: 0.5rem;">
+
+      <a href="about.html">About</a>
+      <a href="help.html">Help</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacyPolicy.html">Privacy Policy</a>
+    </div>
+    &copy; 2025 ThinkTankX Universe. All rights reserved.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Consumables - ThinkTankX</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #e6f0ff, #cce0ff);
+      color: #000;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    header {
+      background: linear-gradient(90deg, #0047ab, #005ce6);
+      color: white;
+      padding: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      flex-wrap: wrap;
+    }
+    .search-bar input {
+      padding: 10px 18px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      width: 220px;
+    }
+    .container {
+      padding: 40px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    h2 {
+      color: #003380;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      background-color: white;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    th, td {
+      padding: 14px 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #0047ab;
+      color: white;
+      font-weight: 600;
+    }
+    tr:hover {
+      background-color: #f2f8ff;
+    }
+    .highlight {
+      background-color: #7dbbff !important;
+    }
+    .form-section {
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .form-section label,
+    .form-section input,
+    .form-section select,
+    .form-section button {
+      font-size: 1rem;
+      margin: 12px;
+    }
+    .form-section input,
+    .form-section select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      width: 200px;
+    }
+    .form-section button {
+      background-color: #0047ab;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .form-section button:hover {
+      background-color: #0066ff;
+    }
+    .chart-section {
+      padding: 0;
+    }
+    .chart-container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+      width: 89%;
+      max-width: 500px;
+      margin: auto;
+    }
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+    .bottom-section {
+      display: flex;
+      gap: 30px;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .form-section, .chart-section {
+      flex: 1 1 45%;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        font-size: 1.5rem;
+        padding: 15px;
+      }
+      .search-bar {
+        margin-top: 10px;
+      }
+      .search-bar input {
+        width: 100%;
+        max-width: 300px;
+      }
+      .container {
+        padding: 20px;
+      }
+      .form-section {
+        padding: 20px 10px;
+      }
+      .form-section input,
+      .form-section select {
+        width: 100%;
+        max-width: 300px;
+      }
+      .form-section label,
+      .form-section input,
+      .form-section select,
+      .form-section button {
+        display: block;
+        margin: 10px auto;
+        text-align: center;
+      }
+      table {
+        font-size: 0.9rem;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      .bottom-section {
+        flex-direction: column;
+      }
+      .chart-container {
+        padding: 20px;
+      }
+      h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    🚀ThinkTankX - Consumables
+    <div class="search-bar">
+      <input type="text" id="searchInput" list="itemList" placeholder="Search item..."/>
+      <datalist id="itemList">
+        <option value="Drinking Water">
+        <option value="Space Food Pack (Veg)">
+        <option value="Oxygen Canister">
+        <option value="Medical First Aid Kit">
+        <option value="Daily Vitamins">
+        <option value="Dehydrated Juice">
+        <option value="Protein Bars">
+      </datalist>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Consumables Inventory</h2>
+
+    <table id="inventoryTable">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Unit</th>
+          <th>Shelf Life (Days)</th>
+          <th>Storage</th>
+          <th>Usage Rate</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <div class="bottom-section">
+      <div class="form-section">
+        <h2>Daily Usage Input</h2>
+        <label for="itemSelect">Item:</label>
+        <select id="itemSelect">
+          <option value="" disabled selected>Select Item</option>
+        </select>
+        <br/>
+        <label for="usedAmount">Used:</label>
+        <input type="number" id="usedAmount" min="1"/>
+        <br/>
+        <button onclick="submitUsage()">Submit</button>
+      </div>
+
+      <div class="chart-section">
+        <div class="chart-container">
+          <h2>Remaining Quantity Pie Chart</h2>
+          <canvas id="usagePieChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const inventory = [
+      { name: "Drinking Water", category: "Water", quantity: 500, unit: "Liters", shelfLife: 180, storage: "Cool", usage: 10 },
+      { name: "Space Food Pack (Veg)", category: "Food", quantity: 300, unit: "Packs", shelfLife: 365, storage: "Ambient", usage: 12 },
+      { name: "Oxygen Canister", category: "Air", quantity: 200, unit: "Liters", shelfLife: 730, storage: "Pressurized", usage: 5 },
+      { name: "Medical First Aid Kit", category: "Medicine", quantity: 50, unit: "Kits", shelfLife: 1095, storage: "Dry", usage: 1 },
+      { name: "Daily Vitamins", category: "Supplement", quantity: 1000, unit: "Tablets", shelfLife: 730, storage: "Cool", usage: 20 },
+      { name: "Dehydrated Juice", category: "Drink", quantity: 100, unit: "Packets", shelfLife: 365, storage: "Cool", usage: 3 },
+      { name: "Protein Bars", category: "Food", quantity: 200, unit: "Bars", shelfLife: 365, storage: "Ambient", usage: 5 }
+    ];
+
+    inventory.forEach(item => item.remaining = item.quantity);
+
+    const tableBody = document.getElementById("tableBody");
+    const itemSelect = document.getElementById("itemSelect");
+    let chart;
+
+    function renderTable() {
+      tableBody.innerHTML = "";
+      inventory.forEach(item => {
+        const row = `<tr>
+          <td>${item.name}</td>
+          <td>${item.category}</td>
+          <td>${item.quantity}</td>
+          <td>${item.unit}</td>
+          <td>${item.shelfLife}</td>
+          <td>${item.storage}</td>
+          <td>${item.usage}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+      });
+    }
+
+    function populateSelectOptions() {
+      inventory.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.name;
+        option.textContent = item.name;
+        itemSelect.appendChild(option);
+      });
+    }
+
+    function drawChart() {
+      const ctx = document.getElementById("usagePieChart").getContext("2d");
+
+      const labels = inventory.map(item => item.name);
+      const data = inventory.map(item => item.remaining);
+      const total = data.reduce((sum, val) => sum + val, 0);
+
+      const alertLabels = labels.map((label, i) => {
+        const percent = (data[i] / total) * 100;
+        return percent < 5 ? `${label} ⚠` : label;
+      });
+
+      const colors = [
+        "#00BFFF", "#FFA07A", "#98FB98", "#FF6347",
+        "#FFD700", "#BA55D3", "#8B4513"
+      ];
+
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: alertLabels,
+          datasets: [{
+            data: data,
+            backgroundColor: colors,
+            borderColor: "#fff",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Remaining Consumables Quantity",
+              font: { size: 20 },
+              color: "#0047ab"
+            },
+            legend: {
+              position: "bottom",
+              labels: { color: "#000" }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = labels[context.dataIndex];
+                  const remaining = data[context.dataIndex];
+                  const percent = ((remaining / total) * 100).toFixed(1);
+                  return `${label}: ${remaining} units (${percent}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function submitUsage() {
+      const itemName = itemSelect.value;
+      const amountUsed = parseInt(document.getElementById("usedAmount").value);
+
+      if (!itemName || isNaN(amountUsed) || amountUsed <= 0) {
+        alert("Please select a valid item and enter a valid amount.");
+        return;
+      }
+
+      const index = inventory.findIndex(item => item.name === itemName);
+      if (index >= 0) {
+        if (amountUsed > inventory[index].remaining) {
+          alert(`❗Insufficient quantity!\nYou have only ${inventory[index].remaining} ${inventory[index].unit} of "${itemName}" remaining.`);
+          return;
+        }
+
+        inventory[index].remaining -= amountUsed;
+
+        if (inventory[index].remaining <= inventory[index].quantity * 0.5) {
+          alert(`⚠ Alert: "${itemName}" is running low!\nOnly ${inventory[index].remaining} ${inventory[index].unit} left.`);
+        }
+      }
+
+      drawChart();
+      document.getElementById("usedAmount").value = "";
+      itemSelect.value = "";
+    }
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+      const searchValue = this.value.toLowerCase();
+      document.querySelectorAll("table tbody tr").forEach(row => {
+        row.classList.remove("highlight");
+        if (row.cells[0].textContent.toLowerCase() === searchValue) {
+          row.classList.add("highlight");
+        }
+      });
+      this.value = "";
+    });
+
+    document.getElementById("usagePieChart").onclick = function(evt) {
+      const activePoints = chart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+      if (activePoints.length > 0) {
+        const index = activePoints[0].index;
+        const item = inventory[index];
+        alert(`📦 ${item.name}\nCategory: ${item.category}\nRemaining Quantity: ${item.remaining} ${item.unit}\nUsage per Day: ${item.usage} ${item.unit}\nShelf Life: ${item.shelfLife} days\nStorage: ${item.storage}`);
+      }
+    };
+
+    renderTable();
+    populateSelectOptions();
+    drawChart();
+  </script>
+</body>
+</html>
