@@ -1,12 +1,17 @@
-FROM node:18-alpine
+# Use official Nginx image as base
+FROM nginx:alpine
 
-WORKDIR /app
+# Set maintainer
+LABEL maintainer="you@example.com"
 
-COPY package*.json ./
-RUN npm install
+# Remove default nginx page
+RUN rm -rf /usr/share/nginx/html/*
 
-COPY . .
+# Copy your HTML/CSS/JS files into nginx web directory
+COPY public/ /usr/share/nginx/html
 
-EXPOSE 3000
+# Expose port 80
+EXPOSE 80
 
-CMD ["node", "server.js"]
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
