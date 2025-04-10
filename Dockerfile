@@ -2,7 +2,7 @@
 FROM nginx:alpine
 
 # Set maintainer
-LABEL maintainer="you@example.com"
+LABEL maintainer="ThinkTankX Team"
 
 # Remove default nginx page
 RUN rm -rf /usr/share/nginx/html/*
