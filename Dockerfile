@@ -1,17 +1,12 @@
-# Use official Nginx image as base
-FROM nginx:alpine
+FROM node:18-alpine
 
-# Set maintainer
-LABEL maintainer="ThinkTankX Team "
+WORKDIR /app
 
-# Remove default nginx page
-RUN rm -rf /usr/share/nginx/html/*
+COPY package*.json ./
+RUN npm install
 
-# Copy your HTML/CSS/JS files into nginx web directory
-COPY public/ /usr/share/nginx/html
+COPY . .
 
-# Expose port 80
-EXPOSE 80
+EXPOSE 3000
 
-# Start Nginx server
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["node", "server.js"]
